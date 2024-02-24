@@ -1,0 +1,25 @@
+---
+apiVersion: skaffold/v2beta26
+kind: Config
+build:
+  artifacts:
+    - image: mqttbridge
+      context: ./..
+      ko:
+        dependencies:
+          paths:
+            - "*.go"
+          ignore:
+            - "*_test.go"
+    - image: module1
+      context: module1
+      ko:
+        dependencies:
+          paths:
+            - "*.go"
+          ignore:
+            - "*_test.go"
+deploy:
+  kubectl:
+    manifests:
+      - "kube/*"

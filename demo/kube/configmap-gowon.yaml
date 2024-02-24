@@ -1,0 +1,11 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gowon-config
+data:
+  config.yaml: |
+    commands:
+      - command: cap
+        endpoint: http://mqttbridge:8080
+        help: capitalise message

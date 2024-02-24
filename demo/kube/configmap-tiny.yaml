@@ -1,0 +1,26 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tiny-config
+data:
+  tiny.yml: |
+    ---
+    servers:
+      - addr: oragono
+        port: 6667
+        tls: false
+
+        realname: tester
+        nicks:
+          - tester
+
+        join:
+          - '#gowon'
+
+    defaults:
+      nicks:
+        - tester
+      realname: tester
+      join: []
+      tls: false

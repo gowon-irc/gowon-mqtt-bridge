@@ -1,0 +1,89 @@
+---
+name: Release
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - '*.go'
+      - go.mod
+      - go.sum
+  pull_request:
+    paths:
+      - '*.go'
+      - go.mod
+      - go.sum
+      - .github/workflows/*.yaml
+
+jobs:
+  gotest:
+    name: Go test
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 1.21
+
+      - name: Test
+        run: go test -v ./...
+
+  build:
+    name: Build
+    runs-on: ubuntu-20.04
+    needs:
+      - gotest
+      # - e2e
+    if: "!contains(github.event.head_commit.message, '[ci-skip]')"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v0.10.2
+        with:
+          versionSpec: '5.x'
+
+      - name: GitVersion
+        id: gitversion
+        uses: gittools/actions/gitversion/execute@v0.10.2
+
+      - name: Prepare
+        id: prep
+        run: |
+          if [ "${{github.event_name}}" == "pull_request" ]; then
+            echo ::set-output name=PUSH::false
+          else
+            echo ::set-output name=PUSH::true
+          fi
+
+          echo ::set-output name=GITVERSIONF::${GITVERSION_FULLSEMVER/+/-}
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 1.21
+
+      - name: Setup ko
+        uses: imjasonh/setup-ko@v0.6
+
+      - name: Build local image
+        run: >
+          ko build --bare --platform linux/amd64,linux/arm64
+          --sbom none --tags latest,${{ steps.prep.outputs.GITVERSIONF }} --push=false .
+        if: ${{ steps.prep.outputs.PUSH == 'false' }}
+
+      - name: Build and push image
+        run: >
+          ko build --bare --platform linux/amd64,linux/arm64
+          --sbom none --tags latest,${{ steps.prep.outputs.GITVERSIONF }} .
+        if: ${{ steps.prep.outputs.PUSH == 'true' }}

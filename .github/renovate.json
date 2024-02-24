@@ -1,0 +1,17 @@
+{
+  "dependencyDashboard": true,
+  "enabled": true,
+  "packageRules": [
+    {
+      "matchDatasources": [ "github-tags" ],
+      "automerge": true,
+      "automergeType": "branch",
+      "groupName": "github-tags"
+    },
+    {
+      "matchDatasources": [ "go" ],
+      "automerge": true
+    }
+  ],
+  "timezone": "Europe/London"
+}

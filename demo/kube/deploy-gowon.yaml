@@ -1,0 +1,43 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gowon
+  labels:
+    app.kubernetes.io/name: gowon
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: gowon
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: gowon
+    spec:
+      containers:
+        - name: gowon
+          image: ghcr.io/gowon-irc/gowon:0.1.0-123
+          env:
+            - name: GOWON_SERVER
+              value: oragono:6667
+            - name: GOWON_NICK
+              value: gowon
+            - name: GOWON_USER
+              value: gowon
+            - name: GOWON_CHANNELS
+              value: "#gowon"
+            - name: GOWON_CONFIG_DIR
+              value: /config
+          ports:
+            - containerPort: 8080
+              name: http
+          volumeMounts:
+            - name: config
+              mountPath: /config/config.yaml
+              subPath: config.yaml
+      volumes:
+        - name: config
+          configMap:
+            name: gowon-config

@@ -1,0 +1,22 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oragono
+  labels:
+    app.kubernetes.io/name: oragono
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: oragono
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: oragono
+    spec:
+      containers:
+        - name: oragono
+          image: oragono/oragono
+          ports:
+            - containerPort: 6667
+              name: ircd
