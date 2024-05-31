@@ -6,7 +6,7 @@ require (
 	github.com/eclipse/paho.mqtt.golang v1.4.3
 	github.com/gin-gonic/gin v1.10.0
 	github.com/gowon-irc/go-gowon v0.0.0-20220719115350-ec869e1addf7
-	github.com/imroc/req/v3 v3.43.6
+	github.com/imroc/req/v3 v3.43.7
 	github.com/jessevdk/go-flags v1.5.0
 )
 
