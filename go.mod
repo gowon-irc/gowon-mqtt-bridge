@@ -6,7 +6,7 @@ require (
 	github.com/eclipse/paho.mqtt.golang v1.5.0
 	github.com/gin-gonic/gin v1.10.0
 	github.com/gowon-irc/go-gowon v0.0.0-20220719115350-ec869e1addf7
-	github.com/imroc/req/v3 v3.43.7
+	github.com/imroc/req/v3 v3.44.0
 	github.com/jessevdk/go-flags v1.6.1
 )
 
@@ -30,7 +30,7 @@ require (
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
-	github.com/klauspost/compress v1.17.7 // indirect
+	github.com/klauspost/compress v1.17.8 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.7 // indirect
 	github.com/kr/pretty v0.3.1 // indirect
 	github.com/leodido/go-urn v1.4.0 // indirect
