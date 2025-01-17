@@ -49,13 +49,13 @@ jobs:
           fetch-depth: 0
 
       - name: Install GitVersion
-        uses: gittools/actions/gitversion/setup@v3.1.1
+        uses: gittools/actions/gitversion/setup@v3.1.2
         with:
           versionSpec: '5.x'
 
       - name: GitVersion
         id: gitversion
-        uses: gittools/actions/gitversion/execute@v3.1.1
+        uses: gittools/actions/gitversion/execute@v3.1.2
 
       - name: Prepare
         id: prep
@@ -74,7 +74,7 @@ jobs:
           go-version: 1.21
 
       - name: Setup ko
-        uses: imjasonh/setup-ko@v0.7
+        uses: imjasonh/setup-ko@v0.8
 
       - name: Build local image
         run: >
