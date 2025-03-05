@@ -8,7 +8,7 @@ require (
 	github.com/eclipse/paho.mqtt.golang v1.5.0
 	github.com/gin-gonic/gin v1.10.0
 	github.com/gowon-irc/go-gowon v0.0.0-20220719115350-ec869e1addf7
-	github.com/imroc/req/v3 v3.49.1
+	github.com/imroc/req/v3 v3.50.0
 	github.com/jessevdk/go-flags v1.6.1
 )
 
