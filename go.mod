@@ -2,7 +2,7 @@ module github.com/gowon-irc/gowon-mqtt-bridge
 
 go 1.22.0
 
-toolchain go1.23.1
+toolchain go1.24.2
 
 require (
 	github.com/eclipse/paho.mqtt.golang v1.5.0
